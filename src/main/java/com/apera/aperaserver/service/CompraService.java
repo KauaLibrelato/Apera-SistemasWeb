@@ -19,7 +19,20 @@ um registro detalhado do lançamento, para exclusão ou edição posteriormente.
 
     @Transactional
     public String salvarCompra(Compra compra) {
-        compraRepository.save(compra);
-        return "Compra bem sucedida";
+        try {
+            validarCompra(compra); // Adicione a validação
+
+            Compra compraSalva = compraRepository.save(compra);
+			
+			if (compra == null || compra.getValor() <= 0) {
+                    throw new IllegalArgumentException("A compra é inválida");
+            }
+		
+            logInfo("Compra salva com sucesso: ID " + compraSalva.getId());
+
+            return "Compra bem sucedida");
+        } catch (Exception e) {
+            return "Erro ao salvar a compra";
+        }
     }
 }
