@@ -1,8 +1,6 @@
 package com.apera.aperaserver.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @Entity
 public class Usuario extends EntityId {

@@ -1,9 +1,6 @@
 package com.apera.aperaserver.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -15,6 +12,10 @@ public class Compra extends EntityId {
     @OneToOne
     @JoinColumn(name = "lancamento_id")
     private Lancamento lancamento;
+
+    @ManyToOne
+    @JoinColumn(name = "carteira_id")
+    private Carteira carteira;
 
     public LocalDate getDataCompra() {
         return dataCompra;

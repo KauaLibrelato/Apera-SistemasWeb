@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "ativo")
 public class Ativo extends EntityId {
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;
@@ -14,7 +13,6 @@ public class Ativo extends EntityId {
     private String logo;
     @Column(name = "data_validade")
     private LocalDate dataValidade;
-
     @OneToOne(mappedBy = "ativo")
     private Lancamento lancamento;
 

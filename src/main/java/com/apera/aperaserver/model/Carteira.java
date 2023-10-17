@@ -1,23 +1,25 @@
 package com.apera.aperaserver.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
-@Table(name = "carteira")
-
 public class Carteira extends EntityId{
-    @Column(name = "usuario", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-    @Column(name = "ativos")
-    private List<Ativo> ativos;
+
+//    @Column(name = "ativos")
+//    private List<Ativo> ativos;
     @Column(name = "valorTotal")
     private Double valorTotal;
-    @Column(name = "historicoCompras")
-    private List<Compra> historicoCompras;
-    @Column(name = "historicoVendas")
-    private List<Venda> historicoVendas;
 
-    @OneToOne(mappedBy = "usuario")
+    @OneToMany(mappedBy = "carteira")
+    private List<Compra> historicoCompras = new ArrayList<>();
+    @OneToMany(mappedBy = "carteira")
+    private List<Venda> historicoVendas = new ArrayList<>();
+
+
 
     public Usuario getUsuario() {
         return usuario;
@@ -27,13 +29,13 @@ public class Carteira extends EntityId{
         this.usuario = usuario;
     }
 
-    public List<Ativo> getAtivos() {
-        return ativos;
-    }
-
-    public void setAtivos(List<Ativo> ativos) {
-        this.ativos = ativos;
-    }
+//    public List<Ativo> getAtivos() {
+//        return ativos;
+//    }
+//
+//    public void setAtivos(List<Ativo> ativos) {
+//        this.ativos = ativos;
+//    }
 
     public Double getValorTotal() {
         return valorTotal;
@@ -63,7 +65,7 @@ public class Carteira extends EntityId{
     public String toString() {
         return "Carteira{" +
                 "usuario=" + usuario +
-                ", ativos=" + ativos +
+                //", ativos=" + ativos +
                 ", valorTotal=" + valorTotal +
                 ", historicoCompras=" + historicoCompras +
                 ", historicoVendas=" + historicoVendas +
